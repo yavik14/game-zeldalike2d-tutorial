@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://capytbjwq2m30"]
+[gd_scene load_steps=10 format=3 uid="uid://capytbjwq2m30"]
 
 [ext_resource type="Texture2D" uid="uid://beqhhiqxw3r3t" path="res://art/player.png" id="1_oul6g"]
 
@@ -92,6 +92,10 @@ _data = {
 &"walkUp": SubResource("Animation_g1dw6")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oul6g"]
+radius = 5.0
+height = 16.0
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = SubResource("GDScript_oul6g")
@@ -105,3 +109,8 @@ vframes = 7
 libraries = {
 &"": SubResource("AnimationLibrary_rkbax")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_oul6g")
