@@ -1,11 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://capytbjwq2m30"]
+[gd_scene load_steps=3 format=3 uid="uid://capytbjwq2m30"]
 
 [ext_resource type="Texture2D" uid="uid://beqhhiqxw3r3t" path="res://art/player.png" id="1_oul6g"]
 
+[sub_resource type="GDScript" id="GDScript_oul6g"]
+script/source = "extends CharacterBody2D
+
+@export var speed: int = 35
+
+func handleInput():
+	var moveDirection = Input.get_vector( \"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+	velocity = moveDirection * speed
+	
+func _physics_process(delta):
+	handleInput()
+	move_and_slide()
+"
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
+script = SubResource("GDScript_oul6g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oul6g")
 hframes = 4
 vframes = 7
+frame = 3
