@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://capytbjwq2m30"]
+[gd_scene load_steps=15 format=3 uid="uid://capytbjwq2m30"]
 
 [ext_resource type="Texture2D" uid="uid://beqhhiqxw3r3t" path="res://art/player.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://1fh4htiloh8w" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Resource" uid="uid://cbit4upodd0wi" path="res://inventory/playerInventory.tres" id="2_g1dw6"]
 
 [sub_resource type="Animation" id="Animation_rkbax"]
 length = 0.001
@@ -139,6 +140,7 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_rkbax")
+inventory = ExtResource("2_g1dw6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

@@ -6,6 +6,8 @@ signal healthChanged
 @export var maxHealth: int = 3
 @export var knockbackPower: int = 500
 
+@export var inventory: Inventory
+
 var isHurt: bool = false
 var enemyCollisions = []
 
