@@ -44,6 +44,8 @@ func _physics_process(delta):
 func _on_hurt_box_area_entered(area):
 	if area.name == "HitBox":
 		enemyCollisions.append(area)
+	elif area.has_method("collect"):
+		area.collect()
 		
 func knockback(enemyVelocity: Vector2):
 	var knockbackDirection = (enemyVelocity-velocity).normalized() * knockbackPower
