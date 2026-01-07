@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://capytbjwq2m30"]
+[gd_scene load_steps=11 format=3 uid="uid://capytbjwq2m30"]
 
 [ext_resource type="Texture2D" uid="uid://beqhhiqxw3r3t" path="res://art/player.png" id="1_oul6g"]
-
-[sub_resource type="GDScript" id="GDScript_oul6g"]
+[ext_resource type="Script" uid="uid://1fh4htiloh8w" path="res://player/player.gd" id="1_rkbax"]
 
 [sub_resource type="Animation" id="Animation_rkbax"]
 length = 0.001
@@ -96,9 +95,12 @@ _data = {
 radius = 5.0
 height = 16.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oul6g"]
+radius = 7.017834
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-script = SubResource("GDScript_oul6g")
+script = ExtResource("1_rkbax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_oul6g")
@@ -114,3 +116,12 @@ libraries = {
 position = Vector2(0, 3)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_oul6g")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_oul6g")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
