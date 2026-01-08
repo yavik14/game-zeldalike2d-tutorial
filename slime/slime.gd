@@ -4,16 +4,22 @@ extends CharacterBody2D
 @export var limit = 0.5
 @export var endPoint = Marker2D
 
-@onready var animations = $AnimatedSprite2D
+@onready var animations = $AnimationPlayer
+@onready var deathEffect = $DeathEffect
+@onready var sprite = $Sprite2D
 
 var startPosition
 var endPosition
+var isDeath = false
 
 func _ready():
 	startPosition = position
 	endPosition = endPoint.global_position
+	sprite.visible = true
+	deathEffect.visible = false
 	
 func _physics_process(delta):
+	if isDeath: return
 	updateVelocity()
 	move_and_slide()
 	updateAnimation()
@@ -39,3 +45,16 @@ func updateAnimation():
 	elif velocity.y < 0: direction = "Up"
 	
 	animations.play("walk" + direction)
+
+func _on_hurt_box_area_entered(area):
+	if area == $HitBox: return
+	$HitBox.set_deferred("monitorable", false)
+	death()
+
+func death():
+	isDeath = true
+	deathEffect.visible = true
+	sprite.visible = false
+	animations.play("deathEffect")
+	await  animations.animation_finished
+	queue_free()
