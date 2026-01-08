@@ -8,23 +8,39 @@ signal healthChanged
 
 @export var inventory: Inventory
 
-var isHurt: bool = false
-var enemyCollisions = []
-
 @onready var animations = $AnimationPlayer
 @onready var effects = $Effects
 @onready var hurtTimer = $HurtTimer
+@onready var weapon = $Weapon
 
 @onready var currentHealth: int = maxHealth
 
+var isHurt: bool = false
+var enemyCollisions = []
+var lastAnimDirection: String = "Down"
+var isAttacking: bool = false
+
 func _ready():
+	weapon.visible = false
 	effects.play("RESET")
 
 func handleInput():
 	var moveDirection = Input.get_vector( "ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = moveDirection * speed
 	
+	if Input.is_action_just_pressed("attack"):
+		attack()
+		
+func attack():
+	animations.play("attack" + lastAnimDirection)
+	isAttacking = true
+	weapon.enable()
+	await animations.animation_finished
+	isAttacking = false
+	weapon.disable()
+	
 func updateAnimation():
+	if isAttacking: return
 	if velocity.length() == 0:
 		if animations.is_playing():
 			animations.stop()
@@ -34,6 +50,7 @@ func updateAnimation():
 	elif velocity.y < 0: direction = "Up"
 	
 	animations.play("walk" + direction)
+	lastAnimDirection = direction
 	
 func _physics_process(delta):
 	handleInput()
