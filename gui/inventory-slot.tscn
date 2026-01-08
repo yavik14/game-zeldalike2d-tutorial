@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://det3ji638j4b5"]
+[gd_scene load_steps=4 format=3 uid="uid://det3ji638j4b5"]
 
 [ext_resource type="Script" uid="uid://cf3qkx6wby8j2" path="res://gui/inventory_slot.gd" id="1_jpfne"]
 [ext_resource type="Texture2D" uid="uid://cxtohioov701o" path="res://art/inventorySlot.png" id="1_va8rg"]
+[ext_resource type="FontFile" uid="uid://ccgehm63kn33p" path="res://art/NormalFont.ttf" id="3_kyika"]
 
 [node name="InventorySlot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -25,3 +26,17 @@ offset_bottom = 20.0
 layout_mode = 2
 
 [node name="item" type="Sprite2D" parent="CenterContainer/Panel"]
+
+[node name="Label" type="Label" parent="CenterContainer/Panel"]
+custom_minimum_size = Vector2(11, 14)
+layout_mode = 0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 9.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_kyika")
+theme_override_font_sizes/font_size = 8
+text = "99"
+horizontal_alignment = 2
